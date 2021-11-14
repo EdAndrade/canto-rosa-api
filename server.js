@@ -1,0 +1,35 @@
+require('dotenv').config()
+
+const PORT              = process.env.APP_PORT
+const express           = require('express')
+const app               = express('app')
+const cors              = require('cors')
+const brandsRouter      = require('./src/brands/brands.router')
+const categoriesRouter  = require('./src/categories/categories.router')
+const colorsRouter      = require('./src/colors/colors.router')
+const sizesRouter       = require('./src/sizes/sizes.router')
+const productsRouter    = require('./src/products/products.router')
+const countiesRouter    = require('./src/counties/counties.router')
+const provincesRouter   = require('./src/provinces/provinces.router')
+const usersRouter       = require('./src/users/users.router')
+const adminsRouter      = require('./src/admins/admins.router')
+const purchasesRouter   = require('./src/purchases/purchases.router')
+
+app.use(express.json())
+app.use(cors())
+app.use('/public', express.static(`public`))
+
+app.use("/api/brands",      brandsRouter)
+app.use("/api/categories",  categoriesRouter)
+app.use("/api/colors",      colorsRouter)
+app.use("/api/sizes",       sizesRouter)
+app.use("/api/products",    productsRouter)
+app.use("/api/counties",    countiesRouter)
+app.use("/api/provinces",   provincesRouter)
+app.use("/api/users",       usersRouter)
+app.use("/api/admins",      adminsRouter)
+app.use("/api/purchases",   purchasesRouter)
+
+app.listen(PORT, () => {
+    console.log(`::SERVER RUNNING::\n[PORT]::${PORT}`)
+})
